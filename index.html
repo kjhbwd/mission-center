@@ -3,133 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>InfoFi Mission Center</title>
+    <title>InfoFi Hub: 경제적 자유를 향한 여정</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* [색상 및 레이아웃] 형광 녹색(#39FF14) 테마 및 칼정렬 설정 */
-        :root { --neon: #39FF14; --bg: #050505; --card-bg: #111111; --text-dim: #888; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: #fff; font-family: 'Apple SD Gothic Neo', sans-serif; padding: 20px; line-height: 1.6; }
-        .container { max-width: 440px; margin: 0 auto; }
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        :root { --neon: #39FF14; --bg: #050505; --card: #111111; }
+        * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { background: var(--bg); color: #fff; margin: 0; overflow-x: hidden; }
         
-        /* 헤더: 공식 공지 vs 나의 분석 */
-        .header { display: flex; justify-content: space-between; font-size: 0.75rem; color: #666; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .my-tag { color: var(--neon); font-weight: bold; }
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
 
-        /* [수정] 본문 분석 박스: 더 크게 강조 */
-        .mission-analysis { 
-            background: var(--card-bg); 
-            padding: 30px; /* 여백 확대 */
-            border-radius: 24px; 
-            border-left: 8px solid var(--neon); 
-            margin-bottom: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .mission-analysis p { 
-            font-size: 1.25rem; /* 폰트 확대 */
-            font-weight: 800; 
-            line-height: 1.6; 
-            color: #ffffff; 
-            letter-spacing: -0.8px;
-        }
-        .point-color { color: var(--neon); }
-
-        /* 미션 카드 공통 */
-        .mission-card { background: var(--card-bg); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid #222; width: 100%; }
-        .mission-card h3 { font-size: 1.1rem; margin-bottom: 15px; color: #fff; font-weight: 800; }
-
-        /* 버튼 기본 설정 */
-        .btn-action { display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 800; border-radius: 16px; width: 100%; border: none; cursor: pointer; transition: 0.2s; }
+        .neon-text { color: var(--neon); }
+        .neon-border { border: 1px solid var(--neon); }
+        .neon-bg { background: var(--neon); color: #000; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
         
-        /* 팬덤크리에이터 버튼: 형광 녹색 배경 */
-        .btn-fandom { background: var(--neon); color: #000; padding: 22px; font-size: 1.15rem; }
-
-        /* Sela 버튼: 기존 타이틀 유지 */
-        .btn-sela { background: #000; color: #fff; border: 1px solid #333; padding: 18px; font-size: 0.95rem; margin-bottom: 12px; }
-
-        /* [수정] 레퍼럴 코드 영역: 더 작고 슬림하게 */
-        .ref-box { display: flex; gap: 8px; align-items: center; padding: 0 10px; }
-        .ref-code { 
-            flex: 1; 
-            background: #000; 
-            border: 1px solid #333; 
-            color: var(--neon); 
-            padding: 8px; /* 패딩 축소 */
-            border-radius: 8px; 
-            text-align: center; 
-            font-family: monospace; 
-            font-size: 0.9rem; /* 크기 축소 */
-            font-weight: bold; 
-        }
-        .ref-btn { 
-            background: #222; 
-            color: #fff; 
-            border: none; 
-            padding: 8px 14px; /* 크기 축소 */
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 0.75rem; 
-            cursor: pointer; 
-        }
-
-        /* 수익 히스토리 */
-        .history-wrap { background: var(--card-bg); padding: 20px; border-radius: 24px; border: 1px solid #222; }
-        .history-title { font-size: 0.9rem; color: var(--neon); font-weight: bold; margin-bottom: 15px; }
-        .history-item { display: block; color: var(--text-dim); text-decoration: none; padding: 12px 0; border-bottom: 1px solid #222; font-size: 0.85rem; }
-        .history-item:first-of-type { color: #fff; font-weight: bold; border-left: 3px solid var(--neon); padding-left: 12px; }
-        .history-item:last-child { border-bottom: none; }
+        /* 버튼 애니메이션 */
+        .btn-hover:active { transform: scale(0.96); }
     </style>
 </head>
-<body>
+<body className="antialiased">
 
-<div class="container">
-    <div class="header">
-        <span>공식 공지: 2026. 01. 12</span>
-        <span class="my-tag">나의 포스팅: 2026. 01. 31</span>
-    </div>
+<div class="flex flex-col md:flex-row min-h-screen">
+    
+    <div class="w-full md:w-1/2 p-6 md:p-10 border-b md:border-b-0 md:border-r border-white/10 overflow-y-auto">
+        <header class="mb-8">
+            <div class="inline-block px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-500 text-[10px] font-bold mb-4 animate-pulse">
+                🚨 Mindshare 0점? 무지성 도배 중단하고 계정 정화부터!
+            </div>
+            <h1 class="text-3xl font-black tracking-tighter text-white mb-2">MISSION <span class="neon-text">CENTER</span></h1>
+            <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest">Phase 1: $CRTR Campaign Mode</p>
+        </header>
 
-    <div class="mission-analysis">
-        <p>
-            "Studio Gate6와 대형 MCN의 결합은 단순한 협업이 아닙니다. <br>지금 확보하는 <span class="point-color">팬덤크리에이터 지분</span>이 향후 온체인 자산 가치를 결정짓는 변곡점이 되지 않을까요?"
-        </p>
-    </div>
+        <div class="glass rounded-3xl p-8 border-l-8 border-l-[#39FF14] mb-8">
+            <p class="text-xl font-extrabold leading-relaxed">
+                "Studio Gate6와 대형 MCN의 결합은 단순한 협업이 아닙니다. <br>지금 확보하는 <span class="neon-text">팬덤크리에이터 지분</span>이 향후 온체인 자산 가치를 결정짓는 변곡점이 되지 않을까요?"
+            </p>
+        </div>
 
-    <div class="mission-card">
-        <h3>FandoraAI 수익 확보</h3>
-        <a href="https://fandora.ai/myPage?tab=REFERRAL&referralCode=m71H3RmY" class="btn-action btn-fandom">
-            🚀 팬덤크리에이터 지분 확보 ➔
-        </a>
-    </div>
+        <div class="space-y-6">
+            <div class="glass rounded-3xl p-6 border border-white/5">
+                <h3 class="text-lg font-black mb-4">FandoraAI 수익 확보</h3>
+                <div class="mb-4 p-3 bg-red-500/10 rounded-xl border border-red-500/20 text-[10px] text-red-400 font-bold leading-tight">
+                    💰 총 $75,000 상당의 $CRTR 보상 | 📅 ~ 2월 9일 상위 150위 타겟
+                </div>
+                <a href="https://fandora.ai/myPage?tab=REFERRAL&referralCode=m71H3RmY" target="_blank" class="block w-full py-4 neon-bg text-center font-black rounded-2xl shadow-[0_0_20px_rgba(57,255,20,0.3)] btn-hover">
+                    🚀 팬덤크리에이터 지분 확보 ➔
+                </a>
+            </div>
 
-    <div class="mission-card">
-        <h3>Sela Network 평판 쌓기</h3>
-        <a href="https://www.selanetwork.io/careers#download" class="btn-action btn-sela">
-            🏢 Sela 노드 온체인 건물주 만들기 ➔
-        </a>
-        <div class="ref-box">
-            <div class="ref-code" id="targetCode">QGHV71YV</div>
-            <button class="ref-btn" onclick="copyRef()">코드 복사</button>
+            <div class="glass rounded-3xl p-6 border border-white/5">
+                <h3 class="text-lg font-black mb-4">Sela Network 평판 쌓기</h3>
+                <a href="https://www.selanetwork.io/careers#download" target="_blank" class="block w-full py-4 bg-black text-white border border-zinc-800 text-center font-black rounded-2xl mb-4 btn-hover">
+                    🏢 Sela 노드 온체인 건물주 만들기 ➔
+                </a>
+                <div class="flex gap-2 items-center px-2">
+                    <div class="flex-1 bg-black/50 border border-white/10 text-center py-2 rounded-lg text-xs font-mono neon-text" id="code1">QGHV71YV</div>
+                    <button onclick="copyCode('code1')" class="px-4 py-2 bg-zinc-800 text-[10px] font-bold rounded-lg border border-white/10 btn-hover">코드 복사</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 p-6 glass rounded-3xl opacity-60">
+            <h4 class="text-xs font-bold neon-text mb-4 uppercase tracking-widest">📊 수익 빌드업 히스토리</h4>
+            <div class="space-y-3 text-[11px] text-zinc-400">
+                <p class="border-b border-white/5 pb-2">01/30: 섀도우 밴의 타격 주의 (리스크 관리)</p>
+                <p class="border-b border-white/5 pb-2">01/29: Create Quest 만들기 (실전 가이드)</p>
+                <p class="border-b border-white/5 pb-2">01/12: Studio Gate6 파트너십 오피셜 공지</p>
+            </div>
         </div>
     </div>
 
-    <div class="history-wrap">
-        <div class="history-title">📊 수익 빌드업 히스토리</div>
-        <a href="https://x.com/thejediworld77/status/2017218472481264065?s=20" target="_blank" class="history-item">01/30: 섀도우 밴의 타격 주의 (리스크 관리)</a>
-        <a href="https://x.com/thejediworld77/status/2017126786828468379?s=20" target="_blank" class="history-item">01/29: Create Quest 만들기 (실전 가이드)</a>
-        <a href="https://x.com/fandomcreator_/status/2010652983697031217?s=20" target="_blank" class="history-item">01/12: Studio Gate6 파트너십 오피셜 공식 공지</a>
+    <div class="w-full md:w-1/2 p-6 md:p-10 bg-zinc-950/50 flex flex-col justify-between">
+        <div>
+            <header class="mb-12 text-right md:text-left">
+                <h2 class="text-2xl md:text-3xl font-black leading-tight text-white italic mb-2">
+                    "크립토 생태계에서 부가가치를 만들어 <br class="hidden md:block"> 경제적 자유를 누렸다"
+                </h2>
+                <p class="text-xs md:text-sm text-zinc-500 font-medium italic">
+                    (Achieving Economic Freedom by Creating Value in the Crypto Ecosystem)
+                </p>
+            </header>
+
+            <div class="space-y-8">
+                <div>
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#01 INFO-FI (랠리온체인)</h4>
+                    <a href="https://waitlist.rally.fun/claim/thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
+                        <span class="font-bold text-sm">Rally Onchain 정보 전파 수익</span>
+                        <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#02 DEPIN (디핀)</h4>
+                    <div class="space-y-3">
+                        <a href="https://kjhbwd.github.io/-aethir-community-guide/" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
+                            <span class="font-bold text-sm">Aethir 커뮤니티 가이드</span>
+                            <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
+                        </a>
+                        <div class="flex items-center justify-between glass p-5 rounded-2xl border-white/5">
+                            <span class="font-bold text-sm">Sela Network (QGHV71YV)</span>
+                            <span class="text-[10px] text-zinc-500">포트폴리오 고정</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#03 DEFI (디파이)</h4>
+                    <div class="space-y-3">
+                        <a href="https://app.river.inc/fun?ref=thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
+                            <span class="font-bold text-sm">River 금융 시스템</span>
+                            <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
+                        </a>
+                        <div class="glass p-5 rounded-2xl border-white/5">
+                            <a href="https://app.termmax.ts.finance/alpha/call-put?ref=C49XY8&chain=bnb" target="_blank" class="flex items-center justify-between mb-3 group">
+                                <span class="font-bold text-sm">Termmax 알파 수익</span>
+                                <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
+                            </a>
+                            <div class="flex gap-2 items-center">
+                                <div class="flex-1 bg-black/40 text-center py-1.5 rounded-lg text-[11px] font-mono text-zinc-400" id="code2">C49XY8</div>
+                                <button onclick="copyCode('code2')" class="px-3 py-1.5 bg-zinc-800 text-[9px] font-bold rounded-lg btn-hover">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <div class="p-6 rounded-3xl bg-gradient-to-br from-zinc-800 to-black border border-[#39FF14]/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+                <h3 class="text-white font-bold mb-2 flex items-center gap-2">🚀 나만의 수익 페이지 만들기</h3>
+                <p class="text-zinc-400 text-[11px] mb-5 leading-relaxed">
+                    남의 링크만 누르지 말고 당신만의 판을 까십시오. <br>바이브 코딩으로 1분 만에 이 페이지를 복제해 드립니다.
+                </p>
+                <a href="https://open.kakao.com/o/gCfTx9di" target="_blank" class="flex items-center justify-center w-full py-4 bg-white text-black font-black rounded-2xl text-center shadow-lg btn-hover gap-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/KakaoTalk_logo.svg" alt="카카오톡" class="w-6 h-6">
+                    <span>수익 판 짜는 법 배우기: 바이브 코딩 커뮤니티 합류</span>
+                </a>
+            </div>
+            <footer class="mt-8 text-center md:text-left opacity-20">
+                <p class="text-[9px] font-bold uppercase tracking-[0.2em]">Fandomcreator @thejediworld77</p>
+            </footer>
+        </div>
     </div>
 </div>
 
 <script>
-    function copyRef() {
-        const code = document.getElementById('targetCode').innerText;
-        navigator.clipboard.writeText(code).then(() => {
-            const btn = document.querySelector('.ref-btn');
-            btn.innerText = '복사됨';
-            btn.style.color = '#39FF14';
-            setTimeout(() => {
-                btn.innerText = '코드 복사';
-                btn.style.color = '#fff';
-            }, 2000);
+    function copyCode(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('코드가 복사되었습니다: ' + text);
         });
     }
 </script>
