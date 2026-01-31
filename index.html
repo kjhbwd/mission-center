@@ -22,10 +22,29 @@
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
         
         /* 버튼 애니메이션 */
+        .btn-hover { transition: all 0.2s ease; }
         .btn-hover:active { transform: scale(0.96); }
+
+        /* 팝업 애니메이션 */
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 </head>
-<body className="antialiased">
+<body class="antialiased">
+
+<div id="welcomePopup" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md hidden p-4">
+    <div class="glass max-w-sm w-full p-8 rounded-3xl border border-[#39FF14]/30 text-center shadow-[0_0_50px_rgba(57,255,20,0.2)] animate-fadeIn">
+        <div class="text-5xl mb-6">🎟️</div>
+        <h2 class="text-2xl font-black text-white mb-2 italic tracking-tight">WELCOME, BUILDER!</h2>
+        <p class="text-zinc-400 text-sm leading-relaxed mb-8">
+            남의 링크만 누르던 유저는 잊으세요.<br>
+            지금부터 당신은 <span class="neon-text font-bold">성장 축제의 빌더</span>입니다.
+        </p>
+        <button onclick="closePopup()" class="w-full py-4 neon-bg font-black rounded-2xl btn-hover shadow-[0_0_20px_rgba(57,255,20,0.4)]">
+            축제 입장하기 (좌표 확인)
+        </button>
+    </div>
+</div>
 
 <div class="flex flex-col md:flex-row min-h-screen">
     
@@ -50,7 +69,7 @@
                 <div class="mb-4 p-3 bg-red-500/10 rounded-xl border border-red-500/20 text-[10px] text-red-400 font-bold leading-tight">
                     💰 총 $75,000 상당의 $CRTR 보상 | 📅 ~ 2월 9일 상위 150위 타겟
                 </div>
-                <a href="https://fandora.ai/myPage?tab=REFERRAL&referralCode=m71H3RmY" target="_blank" class="block w-full py-4 neon-bg text-center font-black rounded-2xl shadow-[0_0_20px_rgba(57,255,20,0.3)] btn-hover">
+                <a href="https://fandora.ai/myPage?tab=REFERRAL&referralCode=m71H3RmY" target="_blank" class="block w-full py-4 neon-bg text-center font-black rounded-2xl shadow-lg btn-hover">
                     🚀 팬덤크리에이터 지분 확보 ➔
                 </a>
             </div>
@@ -62,17 +81,8 @@
                 </a>
                 <div class="flex gap-2 items-center px-2">
                     <div class="flex-1 bg-black/50 border border-white/10 text-center py-2 rounded-lg text-xs font-mono neon-text" id="code1">QGHV71YV</div>
-                    <button onclick="copyCode('code1')" class="px-4 py-2 bg-zinc-800 text-[10px] font-bold rounded-lg border border-white/10 btn-hover">코드 복사</button>
+                    <button onclick="copyCode('code1')" class="px-4 py-2 bg-zinc-800 text-[10px] font-bold rounded-lg btn-hover">코드 복사</button>
                 </div>
-            </div>
-        </div>
-
-        <div class="mt-10 p-6 glass rounded-3xl opacity-60">
-            <h4 class="text-xs font-bold neon-text mb-4 uppercase tracking-widest">📊 수익 빌드업 히스토리</h4>
-            <div class="space-y-3 text-[11px] text-zinc-400">
-                <p class="border-b border-white/5 pb-2">01/30: 섀도우 밴의 타격 주의 (리스크 관리)</p>
-                <p class="border-b border-white/5 pb-2">01/29: Create Quest 만들기 (실전 가이드)</p>
-                <p class="border-b border-white/5 pb-2">01/12: Studio Gate6 파트너십 오피셜 공지</p>
             </div>
         </div>
     </div>
@@ -90,57 +100,41 @@
 
             <div class="space-y-8">
                 <div>
-                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#01 INFO-FI (랠리온체인)</h4>
-                    <a href="https://waitlist.rally.fun/claim/thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#01 INFO-FI</h4>
+                    <a href="https://waitlist.rally.fun/claim/thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 btn-hover group">
                         <span class="font-bold text-sm">Rally Onchain 정보 전파 수익</span>
                         <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
                     </a>
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#02 DEPIN (디핀)</h4>
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#02 DEPIN</h4>
                     <div class="space-y-3">
-                        <a href="https://kjhbwd.github.io/-aethir-community-guide/" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
+                        <a href="https://kjhbwd.github.io/-aethir-community-guide/" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 btn-hover group">
                             <span class="font-bold text-sm">Aethir 커뮤니티 가이드</span>
                             <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
                         </a>
-                        <div class="flex items-center justify-between glass p-5 rounded-2xl border-white/5">
-                            <span class="font-bold text-sm">Sela Network (QGHV71YV)</span>
-                            <span class="text-[10px] text-zinc-500">포트폴리오 고정</span>
-                        </div>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#03 DEFI (디파이)</h4>
-                    <div class="space-y-3">
-                        <a href="https://app.river.inc/fun?ref=thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 transition-all btn-hover group">
-                            <span class="font-bold text-sm">River 금융 시스템</span>
-                            <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
-                        </a>
-                        <div class="glass p-5 rounded-2xl border-white/5">
-                            <a href="https://app.termmax.ts.finance/alpha/call-put?ref=C49XY8&chain=bnb" target="_blank" class="flex items-center justify-between mb-3 group">
-                                <span class="font-bold text-sm">Termmax 알파 수익</span>
-                                <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
-                            </a>
-                            <div class="flex gap-2 items-center">
-                                <div class="flex-1 bg-black/40 text-center py-1.5 rounded-lg text-[11px] font-mono text-zinc-400" id="code2">C49XY8</div>
-                                <button onclick="copyCode('code2')" class="px-3 py-1.5 bg-zinc-800 text-[9px] font-bold rounded-lg btn-hover">복사</button>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">#03 DEFI</h4>
+                    <a href="https://app.river.inc/fun?ref=thejediworld77" target="_blank" class="flex items-center justify-between glass p-5 rounded-2xl border-white/5 hover:border-[#39FF14]/30 btn-hover group">
+                        <span class="font-bold text-sm">River 금융 시스템</span>
+                        <span class="neon-text group-hover:translate-x-1 transition-transform">➔</span>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="mt-12">
-            <div class="p-6 rounded-3xl bg-gradient-to-br from-zinc-800 to-black border border-[#39FF14]/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+            <div class="p-6 rounded-3xl bg-gradient-to-br from-zinc-800 to-black border border-[#39FF14]/20 shadow-2xl">
                 <h3 class="text-white font-bold mb-2 flex items-center gap-2">🚀 나만의 수익 페이지 만들기</h3>
                 <p class="text-zinc-400 text-[11px] mb-5 leading-relaxed">
                     남의 링크만 누르지 말고 당신만의 판을 까십시오. <br>바이브 코딩으로 1분 만에 이 페이지를 복제해 드립니다.
                 </p>
                 <a href="https://open.kakao.com/o/gCfTx9di" target="_blank" class="flex items-center justify-center w-full py-4 bg-white text-black font-black rounded-2xl text-center shadow-lg btn-hover gap-2">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/KakaoTalk_logo.svg" alt="카카오톡" class="w-6 h-6">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/KakaoTalk_logo.svg" alt="카톡" class="w-6 h-6">
                     <span>수익 판 짜는 법 배우기: 바이브 코딩 커뮤니티 합류</span>
                 </a>
             </div>
@@ -152,6 +146,18 @@
 </div>
 
 <script>
+    // 팝업 로직
+    window.onload = function() {
+        setTimeout(() => {
+            document.getElementById('welcomePopup').classList.remove('hidden');
+        }, 500);
+    };
+
+    function closePopup() {
+        document.getElementById('welcomePopup').classList.add('hidden');
+    }
+
+    // 복사 로직
     function copyCode(id) {
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text).then(() => {
